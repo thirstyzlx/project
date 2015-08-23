@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Gametime:
+  = @appointment.gametime
+%p
+  %b Player1id:
+  = @appointment.player1ID
+%p
+  %b Player2id:
+  = @appointment.player2ID
+
+= link_to 'Edit', edit_appointment_path(@appointment)
+\|
+= link_to 'Back', appointments_path

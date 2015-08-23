@@ -1,0 +1,108 @@
+html {
+    overflow: hidden;
+    -ms-touch-action: none;
+    -ms-content-zooming: none;
+}
+
+#canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.clear-nav{
+  border: none;
+  background-color: transparent;
+  background: transparent;
+
+}
+
+.layoutBackground{
+  z-index: 0;
+  width: auto;
+  height: auto;
+  background-size: 100%;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  margin: auto;
+  background-image:url("/assets/back2.jpg");
+}
+
+#layoutMain{
+    z-index : -1;
+}
+
+#layoutSideMenu{
+  z-index: 1;
+  position: absolute;
+  background-color: white;
+  height: auto;
+  border: solid 5px #3333ff;
+  width: 280px;
+}
+
+.navbarTitle{
+    color: #cc0033;
+    font-size: 18px;
+    padding-right: 5px;
+}
+
+.sideMenuWidth{
+    width: 250px;
+}
+
+.menuAlignTitle{
+    text-align: center;
+}
+
+.errMsg{
+    color: red;
+}
+
+/*3D flip effect */
+/* entire container, keeps perspective */
+.flip-container {
+    perspective: 1000;
+}
+/* flip the pane when hovered */
+.flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+}
+.flip-container, .front, .back {
+    width: 100%;
+    height: 100%;
+}
+/* flip speed goes here */
+.flipper {
+    transition: 1.0s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+/* hide back of pane during swap */
+.front, .back {
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* front pane, placed above back */
+.front {
+    z-index: 10;
+}
+/* back, initially hidden pane */
+.back {
+    z-index: 9;
+    transform: rotateY(180deg);
+}
+
+#mainBookDuoFront{
+    height:300px;
+    background-repeat: no-repeat;
+    background-image:url("/assets/test1.jpg");
+}
+
+#mainBookDuoBack{
+    height:300px;
+    background-repeat: no-repeat;
+    background-image:url("/assets/test2.jpg");
+}

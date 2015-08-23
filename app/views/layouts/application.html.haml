@@ -1,0 +1,95 @@
+!!!
+%html
+  %head
+    %title Summoners' Lounge
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:content => "width=device-width,initial-scale=1.0", :name => "viewport"}
+    %link(href="/assets/bootstrap.css" rel="stylesheet")
+    %link(href="/assets/bootstrap-theme.css" rel="stylesheet")
+    %link(href="/assets/LOLStyle.css" rel="stylesheet")
+
+    %script{:src => "/assets/bootstrap.min.js"}
+    %script{:src => "/assets/LOL.js"}
+
+  %body.layoutBackground
+    %nav.navbar.navbar-default.clear-nav
+      %a.btn.glyphicon.glyphicon-align-justify#layoutToggleBtn{"aria-hidden" => "true", :style=>"font-size: 200%; color:#3333ff"}
+      - if user_signed_in?
+        .pull-right
+          %h6.navbarTitle Welcome back, #{current_user.game_id}
+      - else
+        .pull-right
+          %h6.navbarTitle Welcome summoner
+
+    %div#layoutSideMenu
+      %ul.list-group
+        %a.li.list-group-item(href="/"){style:"opacity:0.7;"} Main Menu
+        %a.li.list-group-item(href="/galleries"){style:"opacity:0.7;"} League Gallery
+        - if user_signed_in?
+          %a.li.list-group-item Game Records
+          %a.li.list-group-item Appointments
+          %a.li.list-group-item My Info
+          %a.li.list-group-item(href="#{destroy_user_session_path}" data-method="delete") Sign out
+        - else
+          %div
+            %ul.nav.nav-tabs.nav-justified{:role=>"tablist"}
+              %li.active{:role => "presentation" }
+                %a(aria-controls="sms_sign_in" data-toggle="tab"){:href => "#sms_sign_in", :role=>"tab"} Sign In
+              %li{:role => "presentation"}
+                %a(aria-controls="sms_sign_up" data-toggle="tab"){:href => "#sms_sign_up", :role=>"tab"} Sign Up
+            %hr
+            %div.tab-content{:style=>"padding-left: 10px"}
+              %div#layoutSideMenuErr
+                - flash.each do |key, value|
+                  %div{:class => "alert alert-#{key}"}
+                    %a.close{"data-dismiss" => "alert", :href => "#"}
+                    %h6.errMsg
+                      = value
+              %div.tab-pane.active#sms_sign_in{:role=>"tabpanel"}
+                %form#sideMenuSignIn{"accept-charset" => "UTF-8", :action => user_session_path, :method => "post"}
+                  %div{:style => "margin:0;padding:0;display:inline"}
+                    %input{:name => "utf8", :type => "hidden", :value => "✓"}
+                    %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+                  .form-group
+                    %input#sms_user_email.sideMenuWidth.form-control{:autofocus => "autofocus", :name => "user[email]", :type => "email", :value => "", :placeholder => "Enter email", :type => "email"}
+                  .form-group
+                    %input#sms_user_password.sideMenuWidth.form-control{:name => "user[password]", :type => "password", :placeholder => "Password", :type => "password"}
+                  .form-group{style:"padding-left:5%"}
+                    %input{:name => "user[remember_me]", :type => "hidden", :value => "0"}
+                    %input#sms_user_remember_me{:name => "user[remember_me]", :type => "checkbox", :value => "1"}
+                    %label{:for => "msm_remember_me",style:"color:black"} Remember me
+                  .form-group{:style=>"padding-left: 70%"}
+                    %input.btn.btn-md.btn-info#sms_submit{:name => "commit", :type => "submit", :value => "Sign in"}
+              %div.tab-pane#sms_sign_up{:role=>"tabpanel"}
+                %form#sideMenuSignUp{"accept-charset" => "UTF-8", :action => user_registration_path, :method => "post"}
+                  %div{:style => "margin:0;padding:0;display:inline"}
+                    %input{:name => "utf8", :type => "hidden", :value => "✓"}
+                    %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+                  .form-group
+                    %input#smsu_user_email.sideMenuWidth.form-control{:autofocus => "autofocus", :name => "user[email]", :type => "email", :value => "", :placeholder => "Enter email", :type => "email"}
+                  .form-group
+                    %input#smsu_user_password.sideMenuWidth.form-control{:name => "user[password]", :type => "email", :value => "", :placeholder => "Enter Password", :type => "password"}
+                  .form-group
+                    %input#smsu_user_password_confirm.sideMenuWidth.form-control{:name => "user[passwordc]", :type => "password", :placeholder => "Re-enter Password", :type => "password"}
+                  .form-group
+                    %input#smsu_user_game_id.sideMenuWidth.form-control{:autofocus => "autofocus", :name => "user[game_id]", :type => "Game ID", :value => "", :placeholder => "Enter Game ID", :type =>"text"}
+                  .form-group{:style=>"padding-left: 70%"}
+                    %input.btn.btn-md.btn-info#sms_submit{:name => "commit", :type => "submit", :value => "Sign up"}
+    %div#layoutMain{style:"height:100%"}
+      = yield
+
+
+:javascript
+  $(document).ready(function(){
+      sideMenuOri = $("#layoutSideMenu").clone();
+
+      var a = "#{user_signed_in?}";
+      if (a != "false"){
+        $("#layoutSideMenu").toggle();
+      }
+      $("#layoutToggleBtn").click(function(){
+          $("#layoutSideMenu").toggle();
+      });
+  });

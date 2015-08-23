@@ -1,0 +1,16 @@
+%script{:src => "/assets/analytics.js"}
+%script{:src => "/assets/ge1doot.js"}
+%script{:src => "/assets/imageTransform3D.js"}
+%script{:src => "/assets/ga.js"}
+%script{:src => "/assets/gallery.js"}
+
+%canvas#canvas{:height => "933", :style => "cursor: hand;", :width => "1920"} 你的浏览器不支持HTML5画布技术，请使用谷歌浏览器。
+
+:javascript
+  if(localStorage.getItem("galleryreloadnum") == "0"){
+    localStorage.setItem("galleryreloadnum", "1");
+    window.location.reload();
+  }else{
+    localStorage.setItem("galleryreloadnum", "0");
+  }
+

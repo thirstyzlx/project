@@ -28,7 +28,8 @@ gem 'cancan'
 gem 'rolify'
 gem 'haml'
 gem 'haml-rails'
-
+gem 'therubyracer'
+gem 'execjs'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

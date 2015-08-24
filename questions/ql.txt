@@ -1,0 +1,4 @@
+1. Update everything to newest
+
+2. Load path error:
+   Add config.assets.paths << Rails.root.join('vendor', 'assets') to /config/application.rb

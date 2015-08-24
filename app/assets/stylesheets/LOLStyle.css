@@ -1,9 +1,3 @@
-html {
-    overflow: hidden;
-    -ms-touch-action: none;
-    -ms-content-zooming: none;
-}
-
 #canvas {
     position: absolute;
     width: 100%;
@@ -28,7 +22,12 @@ html {
   background-image:url("/assets/back2.jpg");
 }
 
+.fheight{
+    height: 100%;
+}
+
 #layoutMain{
+    height:600px;
     z-index : -1;
 }
 
@@ -95,14 +94,94 @@ html {
     transform: rotateY(180deg);
 }
 
-#mainBookDuoFront{
-    height:300px;
+.mainPanelMenu{
+    height:100%;
     background-repeat: no-repeat;
-    background-image:url("/assets/test1.jpg");
+    background-size: contain;
+    background-color: transparent;
 }
 
+#mainBookDuoFront{
+    opacity: 0.6;
+    background-image:url("/assets/DuoRank1.png");
+}
+#mainBookDuoFront:hover{
+    opacity: 1.0;
+}
 #mainBookDuoBack{
-    height:300px;
-    background-repeat: no-repeat;
-    background-image:url("/assets/test2.jpg");
+    opacity: 0.6;
+    background-image:url("/assets/DuoRank2.png");
+}
+#mainBookDuoBack:hover{
+    opacity: 1.0;
+}
+#mainGalleryFront{
+    opacity: 0.6;
+    background-image:url("/assets/Gallery1.png");
+}
+#mainGalleryFront:hover{
+    opacity: 1.0;
+}
+#mainGalleryBack{
+    opacity: 0.6;
+    background-image:url("/assets/Gallery2.png");
+}
+#mainGalleryBack:hover{
+    opacity: 1.0;
+}
+#mainTacticsFront{
+    opacity: 0.6;
+    background-image:url("/assets/Tactics1.png");
+}
+#mainTacticsFront:hover{
+    opacity: 1.0;
+}
+#mainTacticsBack{
+    opacity: 0.6;
+    background-image:url("/assets/Tactics2.png");
+}
+#mainChampionItemBack:hover{
+    opacity: 1.0;
+}
+#mainChampionItemFront{
+    opacity: 0.6;
+    background-image:url("/assets/ChampionItem1.png");
+}
+#mainChampionItemFront:hover{
+    opacity: 1.0;
+}
+#mainChampionItemBack{
+    opacity: 0.6;
+    background-image:url("/assets/ChampionItem2.png");
+}
+#mainTacticsBack:hover{
+    opacity: 1.0;
+}
+#mainCurrentBattleFront{
+    opacity: 0.6;
+    background-image:url("/assets/CurrentBattle1.png");
+}
+#mainCurrentBattleFront:hover{
+    opacity: 1.0;
+}
+#mainCurrentBattleBack{
+    opacity: 0.6;
+    background-image:url("/assets/CurrentBattle2.png");
+}
+#mainCurrentBattleBack:hover{
+    opacity: 1.0;
+}
+#mainSearchPlayerFront{
+    opacity: 0.6;
+    background-image:url("/assets/SearchPlayer1.png");
+}
+#mainSearchPlayerFront:hover{
+    opacity: 1.0;
+}
+#mainSearchPlayerBack{
+    opacity: 0.6;
+    background-image:url("/assets/SearchPlayer2.png");
+}
+#mainSearchPlayerBack:hover{
+    opacity: 1.0;
 }

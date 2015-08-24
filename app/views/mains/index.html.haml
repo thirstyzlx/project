@@ -1,10 +1,32 @@
-%div
-  .col-lg-6.col-md-6.col-sm-12.col-xs-12
+.fheight
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight{style:"padding-top:2%; background-color:transparent"}
     .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
-      .flipper
-        .front#mainBookDuoFront
-          One
-        .back#mainBookDuoBack
-          Two
-  .col-lg-6.col-md-6.col-sm-12.col-xs-12
-    world
+      .flipper.fheight
+        .front.mainPanelMenu#mainBookDuoFront
+        .back.mainPanelMenu#mainBookDuoBack
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight{style:"padding-top:12%; background-color:transparent"}
+    .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
+      .flipper.fheight
+        .front.mainPanelMenu#mainTacticsFront
+        .back.mainPanelMenu#mainTacticsBack
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight{style:"padding-top:2%; background-color:transparent"}
+    .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
+      .flipper.fheight
+        .front.mainPanelMenu#mainChampionItemFront
+        .back.mainPanelMenu#mainChampionItemBack
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight{style:"padding-top:12%; background-color:transparent"}
+    .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
+      .flipper.fheight
+        .front.mainPanelMenu#mainCurrentBattleFront
+        .back.mainPanelMenu#mainCurrentBattleBack
+
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight{style:"padding-top:2%; background-color:transparent"}
+    .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
+      .flipper.fheight
+        .front.mainPanelMenu#mainSearchPlayerFront
+        .back.mainPanelMenu#mainSearchPlayerBack
+  %a.col-lg-2.col-md-3.col-sm-4.col-xs-12.fheight(href="/galleries"){style:"padding-top:12%; background-color:transparent"}
+    .flip-container{:ontouchstart => "this.classList.toggle('hover');"}
+      .flipper.fheight
+        .front.mainPanelMenu#mainGalleryFront
+        .back.mainPanelMenu#mainGalleryBack

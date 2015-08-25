@@ -24,6 +24,7 @@ module LOL
     config.assets.enabled = true
     config.assets.paths << Rails.root.join('vendor', 'assets')
     config.autoload_paths << Rails.root.join('lib')
+    config.paths['app/views'] << "app/views/devise"
     config.active_record.raise_in_transactional_callbacks = true
   end
 end

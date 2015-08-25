@@ -36,12 +36,13 @@
   position: absolute;
   background-color: white;
   height: auto;
-  border: solid 5px #3333ff;
+  border: solid 1px deepskyblue;
   width: 280px;
 }
 
 .navbarTitle{
-    color: #cc0033;
+    /*color: #cc0033;*/
+    color: deepskyblue;
     font-size: 18px;
     padding-right: 5px;
 }

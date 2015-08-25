@@ -21,6 +21,9 @@ class RegisterController < Devise::SessionsController
         set_minimum_password_length
         respond_with resource
       end
+    else
+      flash[:notice] = "Registration Failed, incorrect Info."
+      redirect_to root_path
     end
   end
 

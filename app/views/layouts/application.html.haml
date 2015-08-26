@@ -6,10 +6,13 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     %meta{:content => "width=device-width,initial-scale=1.0", :name => "viewport"}
+    %link(href="/assets/style.css" rel="stylesheet")
+    %link(href="/assets/bootstrap-social.css" rel="stylesheet")
     %link(href="/assets/bootstrap.css" rel="stylesheet")
     %link(href="/assets/bootstrap-theme.css" rel="stylesheet")
     %link(href="/assets/LOLStyle.css" rel="stylesheet")
 
+    %link(href="/assets/font-awesome.min.css" rel="stylesheet")
     %script{:src => "/assets/bootstrap.min.js"}
     %script{:src => "/assets/LOL.js"}
 
@@ -63,6 +66,7 @@
                     %label{:for => "msm_remember_me",style:"color:black"} Remember me
                   .form-group{:style=>"padding-left: 70%"}
                     %input.btn.btn-md.btn-info#sms_submit{:name => "commit", :type => "submit", :value => "Sign in"}
+
               %div.tab-pane#sms_sign_up{:role=>"tabpanel"}
                 %form#sideMenuSignUp{"accept-charset" => "UTF-8", :action => user_registration_path, :method => "post"}
                   %div{:style => "margin:0;padding:0;display:inline"}
@@ -78,6 +82,17 @@
                     %input#smsu_user_game_id.sideMenuWidth.form-control{:autofocus => "autofocus", :name => "user[game_id]", :type => "Game ID", :value => "", :placeholder => "Enter Game ID", :type =>"text"}
                   .form-group{:style=>"padding-left: 70%"}
                     %input.btn.btn-md.btn-info#sms_submit{:name => "commit", :type => "submit", :value => "Sign up"}
+            %hr
+            %div
+              %a.btn.btn-block.btn-social.btn-facebook
+                %i.fa.fa-facebook
+                Sign in with Facebook
+              %a.btn.btn-block.btn-social.btn-twitter
+                %i.fa.fa-twitter
+                Sign in with Twitter
+              %a.btn.btn-block.btn-social.btn-google-plus
+                %i.fa.fa-google-plus
+                Sign in with Google
 
     .fheight#layoutMain
       = yield

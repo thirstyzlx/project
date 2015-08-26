@@ -1,25 +1,29 @@
-%h1 Listing appointments
+- if not(user_signed_in?)
+  %div{style:"text-align: center"}
+    %h2{style:"color: gold"} Please Sign In First!
+-else
+  .col-lg-2.aptTile
+    .circle-tile
+      .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank5.png')"}
+        5
+      .circle-tile-content
+        .circle-tile-description.text-faded
+          Garen - AD Carry
+        .circle-tile-number.text-faded
+          2015-08-12 18:00
+        %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=garen"}
+          Player Info
+          %i.fa.fa-chevron-circle-right
 
-%table
-  %thead
-    %tr
-      %th Gametime
-      %th Player1id
-      %th Player2id
-      %th
-      %th
-      %th
-
-  %tbody
-    - @appointments.each do |appointment|
-      %tr
-        %td= appointment.gametime
-        %td= appointment.player1ID
-        %td= appointment.player2ID
-        %td= link_to 'Show', appointment
-        %td= link_to 'Edit', edit_appointment_path(appointment)
-        %td= link_to 'Destroy', appointment, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Appointment', new_appointment_path
+  .col-lg-2.aptTile
+    .circle-tile
+      .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank4.png')"}
+        5
+      .circle-tile-content
+        .circle-tile-description.text-faded
+          Waxwam - AP Carry
+        .circle-tile-number.text-faded
+          2015-08-12 19:00
+        %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=waxwam"}
+          Player Info
+          %i.fa.fa-chevron-circle-right

@@ -1,4 +1,13 @@
 class RegisterController < Devise::SessionsController
+  skip_before_filter :require_no_authentication, :only => [:new, :create]
+  def new
+    super
+  end
+
+  def edit
+    super
+  end
+
   # POST /resource
   def create
     if params[:user][:password] == params[:user][:passwordc] and params[:user][:password] != "" and params[:user][:email] != "" and params[:user][:game_id] != "" and not(User.exists?(:game_id => params[:user][:game_id]))

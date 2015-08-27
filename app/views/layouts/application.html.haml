@@ -34,7 +34,7 @@
         - if user_signed_in?
           %a.li.list-group-item Game Records
           %a.li.list-group-item Appointments
-          %a.li.list-group-item My Info
+          %a.li.list-group-item(href="/users/edit") Update My Info
           %a.li.list-group-item(href="#{destroy_user_session_path}" data-method="delete") Sign out
         - else
           %div

@@ -1,0 +1,36 @@
+- if not(user_signed_in?)
+  %div{style:"text-align: center"}
+    %h2{style:"color: gold"} Please Sign In First!
+-else
+
+  %div{style:"text-align: center"}
+    %div
+      %ul.nav.nav-tabs{:role=>"tablist"}
+        %li.active{:role => "presentation" }
+          %a(aria-controls="mi_change_password" data-toggle="tab"){:href => "#mi_change_password", :role=>"tab"} Change Password
+        %li{:role => "presentation"}
+          %a(aria-controls="mi_update_my_info" data-toggle="tab"){:href => "#mi_update_my_info", :role=>"tab"} Update My Info
+      .tab-content{:style=>"padding-left: 10px"}
+        %div.tab-pane.active#mi_change_password{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
+          %h2{style:"color: deepskyblue"} Change Password
+          %form#me_edit_account.edit_account{"accept-charset" => "UTF-8", :action => "/accounts", :method => "post", :autocomplete => "off"}
+            %div{:style => "margin:0;padding:0;display:inline"}
+              %input{:name => "utf8", :type => "hidden", :value => "✓"}
+              %input{:name => "_method", :type => "hidden", :value => "put"}
+              %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+            .form-group
+              %input#me_account_email.form-control{readonly:true, :name => "account[email]", :type => "email", :value => "#{current_user.email}" ,:type => "email"}
+            .form-group
+              %input#me_account_current_password.form-control{:name => "account[current_password]", :type => "password", :placeholder => "Current Password",:autocomplete => "off", :value=>""}
+            .form-group
+              %input#me_account_password.form-control{:name => "account[password]", :type => "password", :placeholder => "New Password"}
+            .form-group
+              %input#me_account_password_confirmation.form-control{:name => "account[password_confirmation]", :type => "password", :placeholder => "New Password Confirm"}
+            .pull-right
+              %input.btn.btn-lg.btn-primary{:name => "commit", :type => "submit", :value => "Update"}
+        %div.tab-pane#mi_update_my_info{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
+          %h2{style:"color: deepskyblue"} Update My Info
+
+
+
+

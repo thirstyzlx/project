@@ -17,7 +17,8 @@
     %script{:src => "/assets/LOL.js"}
 
   %body.layoutBackground
-
+    %div{style:"text-align:center"}
+      %h3{style:"margin: auto"} The page is best to be viewed under Firefox / Chrome
     %nav.navbar.navbar-default.clear-nav
       %a.btn.glyphicon.glyphicon-align-justify#layoutToggleBtn{"aria-hidden" => "true", :style=>"font-size: 200%; color:deepskyblue;"}
       - if user_signed_in?
@@ -27,7 +28,7 @@
         .pull-right
           %h6.navbarTitle Welcome summoner
 
-    %div#layoutSideMenu
+    %div#layoutSideMenu{style:"display:none"}
       %ul.list-group
         %a.li.list-group-item(href="/") Main Menu
         %a.li.list-group-item(href="/galleries")League Gallery
@@ -63,7 +64,7 @@
                   .form-group{style:"padding-left:5%"}
                     %input{:name => "user[remember_me]", :type => "hidden", :value => "0"}
                     %input#sms_user_remember_me{:name => "user[remember_me]", :type => "checkbox", :value => "1"}
-                    %label{:for => "msm_remember_me",style:"color:black"} Remember me
+                    %label{:for => "sms_user_remember_me",style:"color:black"} Remember me
                   .form-group{:style=>"padding-left: 70%"}
                     %input.btn.btn-md.btn-info#sms_submit{:name => "commit", :type => "submit", :value => "Sign in"}
 
@@ -97,20 +98,13 @@
     .fheight#layoutMain
       = yield
   %footer
-    .col-lg-8.col-md-8.col-sm-8.col-xs-12{style:"padding-top: 3%"}
+    .col-lg-8.col-md-8.col-sm-8.col-xs-12{style:"padding-top: 4%"}
       Copyright © 2015 Lu Zou
-
 
 
 
 :javascript
   $(document).ready(function(){
-      sideMenuOri = $("#layoutSideMenu").clone();
-
-      var a = "#{user_signed_in?}";
-      if (a != "false"){
-        $("#layoutSideMenu").toggle();
-      }
       $("#layoutToggleBtn").click(function(){
           $("#layoutSideMenu").toggle();
       });

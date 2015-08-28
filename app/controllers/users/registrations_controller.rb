@@ -12,6 +12,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if params[:user][:password] == params[:user][:passwordc] and params[:user][:password] != "" and params[:user][:email] != "" and params[:user][:game_id] != "" and not(User.exists?(:game_id => params[:user][:game_id]))
       build_resource(sign_up_params)
       resource.game_id = params[:user][:game_id]
+      resource.rankb = "Unranked"
+      resource.ranks = "1"
+      resource.rankBadge = "/assets/rank1.png"
       resource.save
       yield resource if block_given?
       if resource.persisted?
@@ -44,25 +47,45 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+    if params[:user][:email] == nil or params[:user][:email]== current_user.email
+      resource_updated = update_resource(resource, account_update_params)
+      if params[:user][:rankb] != nil and params[:user][:ranks] != nil
+        resource.rankb = params[:user][:rankb];
+        resource.ranks = params[:user][:ranks];
+        case params[:user][:rankb]
+          when "Unranked"
+            resource.rankBadge = "/assets/rank1.png"
+          when "Bronze"
+            resource.rankBadge = "/assets/rank2.png"
+          when "Silver"
+            resource.rankBadge = "/assets/rank3.png"
+          when "Gold"
+            resource.rankBadge = "/assets/rank4.png"
+          when "Platinum"
+            resource.rankBadge = "/assets/rank5.png"
+          when "Diamond"
+            resource.rankBadge = "/assets/rank6.png"
+          when "Master"
+            resource.rankBadge = "/assets/rank7.png"
+          when "Challenger"
+            resource.rankBadge = "/assets/rank8.png"
 
-    resource_updated = update_resource(resource, account_update_params)
-    if params[:user][:rankb] != nil and params[:user][:ranks] != nil
-      resource.rankb = params[:user][:rankb];
-      resource.ranks = params[:user][:ranks];
-      resource.save
-    end
-    yield resource if block_given?
-    if resource_updated
-      if is_flashing_format?
-        flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
-            :update_needs_confirmation : :updated
-        set_flash_message :notice, flash_key
+        end
+        resource.save
       end
-      sign_in resource_name, resource, bypass: true
-      respond_with resource, location: after_update_path_for(resource)
-    else
-      clean_up_passwords resource
-      redirect_to "/"
+      yield resource if block_given?
+      if resource_updated
+        if is_flashing_format?
+          flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+              :update_needs_confirmation : :updated
+          set_flash_message :notice, flash_key
+        end
+        sign_in resource_name, resource, bypass: true
+        redirect_to "/"
+      else
+        clean_up_passwords resource
+        redirect_to "/"
+      end
     end
   end
 

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  post "/appointments/createAppt" => "appointments#createAppt"
+
   resources :appointments
   resources :galleries
   root 'mains#index'

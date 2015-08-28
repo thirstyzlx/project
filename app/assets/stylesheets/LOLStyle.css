@@ -3,6 +3,13 @@ html {
     -ms-content-zooming: none;
 }
 
+.topItem{
+    z-index: 10;
+}
+.botItem{
+    z-index: -1;
+}
+
 #canvas {
     position: absolute;
     width: 100%;

@@ -2,28 +2,87 @@
   %div{style:"text-align: center"}
     %h2{style:"color: gold"} Please Sign In First!
 -else
-  .col-lg-2.aptTile
-    .circle-tile
-      .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank5.png')"}
-        5
-      .circle-tile-content
-        .circle-tile-description.text-faded
-          Garen - AD Carry
-        .circle-tile-number.text-faded
-          2015-08-12 18:00
-        %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=garen"}
-          Player Info
-          %i.fa.fa-chevron-circle-right
+  .botItem
+    .col-lg-2.aptTile
+      .circle-tile
+        .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank5.png')"}
+          5
+        .circle-tile-content
+          .circle-tile-description.text-faded
+            Garen - AD Carry
+          .circle-tile-number.text-faded
+            2015-08-12 18:00
+          %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=garen"}
+            Player Info
+            %i.fa.fa-chevron-circle-right
 
-  .col-lg-2.aptTile
-    .circle-tile
-      .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank4.png')"}
-        5
-      .circle-tile-content
-        .circle-tile-description.text-faded
-          Waxwam - AP Carry
-        .circle-tile-number.text-faded
-          2015-08-12 19:00
-        %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=waxwam"}
-          Player Info
-          %i.fa.fa-chevron-circle-right
+    .col-lg-2.aptTile
+      .circle-tile
+        .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank4.png')"}
+          5
+        .circle-tile-content
+          .circle-tile-description.text-faded
+            Waxwam - AP Carry
+          .circle-tile-number.text-faded
+            2015-08-12 19:00
+          %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=waxwam"}
+            Player Info
+            %i.fa.fa-chevron-circle-right
+
+  .topItem#appointmentWindow{style:"text-align:center; width: 40%; margin-left: 30%; position: absolute; background-color:rgba(0, 0, 0, 0.6);"}
+    %h2{style:"color:gold; margin: auto;"} Create a Duo Appointment
+    %hr
+    %div
+      %form#new_appointment.new_appointment{style:"width: 80%; margin:auto", "accept-charset" => "UTF-8", :action => "/appointments", :method => "post"}
+        %input{:name => "utf8", :type => "hidden", :value => "✓"}
+        %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+        .form-group#appointment_fail{style:"display:none; color: red"}
+          Creation failed, please double check your info
+        .form-group
+          %label{style:"color:gold"} My Game ID
+          %input#appointment_player1ID.form-control{readonly:true, :autofocus => "autofocus", :name => "appointment[player1ID]", :type => "text", :value => "#{current_user.game_id}"}
+        .form-group
+          %label{style:"color:gold"} Enter Duo Time
+          %input#appointment_gametime.form-control{:name => "appointment[gametime]", :type => "text", :value => "", :placeholder => "Game Time"}
+        .form-group
+          %label{style:"color:gold"} Preferred Position
+          %select.form-control#appointment_position{:name => "appointment[position]"}
+            %option{:value => "AP Carry"} AP Carry
+            %option{:value => "AD Carry"} AD Carry
+            %option{:value => "Support"} Support
+            %option{:value => "Top"} Top
+            %option{:value => "Jungler"} Jungler
+        .actions
+          %a.btn.btn-lg.btn-warning(href="javascript: appointmentCancel();") Cancel
+          %a.btn.btn-lg.btn-primary(href="javascript: appointmentSubmit();") Submit
+
+
+:javascript
+  function appointmentSubmit(){
+    var player1ID = document.getElementById("appointment_player1ID").value;
+    var gametime = document.getElementById("appointment_gametime").value;
+    var position = document.getElementById("appointment_position").value;
+    console.log(player1ID + ", " + gametime + ", " + position);
+    $.ajax({
+      url:  "/appointments/createAppt",
+      type: "post",
+      dataType: "json",
+      data: {"player1ID": player1ID, "gametime": gametime, "position":position},
+      success: function(data){
+        if(data.status == 1){
+          appointmentCancel();
+        }else{
+          document.getElementById("appointment_fail").style.display = "block";
+        }
+      }
+    });
+  }
+  function appointmentCancel(){
+    document.getElementById("appointment_gametime").value = "";
+    document.getElementById("appointment_position").value = "";
+    document.getElementById("appointmentWindow").style.display = "none";
+    document.getElementById("appointment_fail").style.display = "none";
+  }
+  function appointmentAppear(){
+
+  }

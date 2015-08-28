@@ -37,6 +37,18 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def createAppt
+    appt = Appointment.new
+    if params[:player1ID] == current_user.game_id and params[:gametime] != ""
+      appt.gametime = params[:gametime]
+      appt.position = params[:position]
+      appt.player1ID = current_user.game_id
+      appt.save
+      render json: {status: 1}.to_json
+    else
+      render json: {status: 0}.to_json
+    end
+  end
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update

@@ -13,24 +13,51 @@
       .tab-content{:style=>"padding-left: 10px"}
         %div.tab-pane.active#mi_change_password{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
           %h2{style:"color: deepskyblue"} Change Password
-          %form#me_edit_account.edit_account{"accept-charset" => "UTF-8", :action => "/accounts", :method => "post", :autocomplete => "off"}
+          %form#mi_edit_password.edit_account{"accept-charset" => "UTF-8", :action => "/users", :method => "post", :autocomplete => "off"}
             %div{:style => "margin:0;padding:0;display:inline"}
               %input{:name => "utf8", :type => "hidden", :value => "✓"}
               %input{:name => "_method", :type => "hidden", :value => "put"}
               %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
             .form-group
-              %input#me_account_email.form-control{readonly:true, :name => "account[email]", :type => "email", :value => "#{current_user.email}" ,:type => "email"}
+              %input#mi_user_email.form-control{readonly:true, :name => "user[email]", :type => "email", :value => "#{current_user.email}" ,:type => "email"}
             .form-group
-              %input#me_account_current_password.form-control{:name => "account[current_password]", :type => "password", :placeholder => "Current Password",:autocomplete => "off", :value=>""}
+              %input#mi_user_current_password.form-control{:name => "user[current_password]", :type => "password", :placeholder => "Current Password",:autocomplete => "off", :value=>""}
             .form-group
-              %input#me_account_password.form-control{:name => "account[password]", :type => "password", :placeholder => "New Password"}
+              %input#mi_user_password.form-control{:name => "user[password]", :type => "password", :placeholder => "New Password"}
             .form-group
-              %input#me_account_password_confirmation.form-control{:name => "account[password_confirmation]", :type => "password", :placeholder => "New Password Confirm"}
+              %input#mi_user_password_confirmation.form-control{:name => "user[password_confirmation]", :type => "password", :placeholder => "New Password Confirm"}
             .pull-right
               %input.btn.btn-lg.btn-primary{:name => "commit", :type => "submit", :value => "Update"}
         %div.tab-pane#mi_update_my_info{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
           %h2{style:"color: deepskyblue"} Update My Info
+          %form.edit_user_profile{:id => "edit_user_account_#{current_user.id}" ,"accept-charset" => "UTF-8", :action => "/users", :method => "post"}
+            %div{:style => "margin:0;padding:0;display:inline"}
+              %input{:name => "utf8", :type => "hidden", :value => "✓"}
+              %input{:name => "_method", :type => "hidden", :value => "put"}
+              %input{:name => "authenticity_token", :type => "hidden", :value => "#{form_authenticity_token}"}
+            .form-group
+              %label{style:"color:gold"} Select Your Rank Level
+              %select.form-control#mi_user_rankb{:name => "user[rankb]", value:"#{current_user.rankb}"}
+                %option{:value => "Unranked"} Unranked
+                %option{:value => "Bronze"} Bronze
+                %option{:value => "Silver"} Silver
+                %option{:value => "Gold"} Gold
+                %option{:value => "Platinum"} Platinum
+                %option{:valie => "Master"} Master
+                %option{:value => "Chanllenger"} Chanllenger
+            .form-group
+              %select.form-control#mi_user_ranks{:name => "user[ranks]", value:"#{current_user.ranks}"}
+                %option{:value => "1"} 1
+                %option{:value => "2"} 2
+                %option{:value => "3"} 3
+                %option{:value => "4"} 4
+                %option{:value => "5"} 5
 
+            .pull-right
+              %input.btn.btn-lg.btn-primary{:name => "commit", :type => "submit", :value => "Update"}
 
-
-
+:javascript
+   $(document).ready(function(){
+      document.getElementById("mi_user_rankb").value = "#{current_user.rankb}";
+      document.getElementById("mi_user_ranks").value = #{current_user.ranks};
+   })

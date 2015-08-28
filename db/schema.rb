@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150827075811) do
     t.string   "game_id",                limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.integer  "rankb",                  limit: 4
+    t.string   "rankb",                  limit: 255
     t.integer  "ranks",                  limit: 4
     t.string   "rankBadge",              limit: 255
   end

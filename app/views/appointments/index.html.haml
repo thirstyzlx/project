@@ -2,6 +2,8 @@
   %div{style:"text-align: center"}
     %h2{style:"color: gold"} Please Sign In First!
 -else
+  %div#appointment_window_container
+    %a.btn.btn-lg.btn-primary.btn-info.btn-block(href="javascript: appointmentAppear();") Create a Duo Game Appointment
   .botItem
     .col-lg-2.aptTile
       .circle-tile
@@ -29,7 +31,7 @@
             Player Info
             %i.fa.fa-chevron-circle-right
 
-  .topItem#appointmentWindow{style:"text-align:center; width: 40%; margin-left: 30%; position: absolute; background-color:rgba(0, 0, 0, 0.6);"}
+  .topItem#appointmentWindow{style:"display:none; text-align:center; width: 40%; margin-left: 30%; position: absolute; background-color:rgba(0, 0, 0, 0.6);"}
     %h2{style:"color:gold; margin: auto;"} Create a Duo Appointment
     %hr
     %div
@@ -42,8 +44,37 @@
           %label{style:"color:gold"} My Game ID
           %input#appointment_player1ID.form-control{readonly:true, :autofocus => "autofocus", :name => "appointment[player1ID]", :type => "text", :value => "#{current_user.game_id}"}
         .form-group
-          %label{style:"color:gold"} Enter Duo Time
-          %input#appointment_gametime.form-control{:name => "appointment[gametime]", :type => "text", :value => "", :placeholder => "Game Time"}
+          %label{style:"color:gold"} Select Duo Date
+          %input#appointment_gamedate.form-control{readonly:true, :type => "text", :value => "", :placeholder => "Click To Select Game Date"}
+        .form-group
+          %label{style:"color:gold"} Select Duo Time
+          %div#appointment_timepicker_container
+            %select.form-control#appointment_timepicker
+              %option{:value => "0"} 0:00 A.M
+              %option{:value => "1"} 1:00 A.M
+              %option{:value => "2"} 2:00 A.M
+              %option{:value => "3"} 3:00 A.M
+              %option{:value => "4"} 4:00 A.M
+              %option{:value => "5"} 5:00 A.M
+              %option{:value => "6"} 6:00 A.M
+              %option{:value => "7"} 7:00 A.M
+              %option{:value => "8"} 8:00 A.M
+              %option{:value => "9"} 9:00 A.M
+              %option{:value => "10"} 10:00 A.M
+              %option{:value => "11"} 11:00 A.M
+              %option{:value => "12"} 12:00 P.M
+              %option{:value => "13"} 1:00 P.M
+              %option{:value => "14"} 2:00 P.M
+              %option{:value => "15"} 3:00 P.M
+              %option{:value => "16"} 4:00 P.M
+              %option{:value => "17"} 5:00 P.M
+              %option{:value => "18"} 6:00 P.M
+              %option{:value => "19"} 7:00 P.M
+              %option{:value => "20"} 8:00 P.M
+              %option{:value => "21"} 9:00 P.M
+              %option{:value => "22"} 10:00 P.M
+              %option{:value => "23"} 11:00 P.M
+
         .form-group
           %label{style:"color:gold"} Preferred Position
           %select.form-control#appointment_position{:name => "appointment[position]"}
@@ -58,31 +89,49 @@
 
 
 :javascript
+  $(document).ready(function(){
+    $( "#appointment_gamedate" ).datepicker();
+  });
+
   function appointmentSubmit(){
+    var curtime = new Date(Date.now());
+    curtime = curtime.getTime() / 100000;
     var player1ID = document.getElementById("appointment_player1ID").value;
-    var gametime = document.getElementById("appointment_gametime").value;
+    var gamedate = document.getElementById("appointment_gamedate").value;
+    gamedate = gamedate.split("/");
+    var gamehour = document.getElementById("appointment_timepicker").value;
+    var gametime = new Date(Date.UTC(gamedate[2], gamedate[0]-1, gamedate[1], gamehour, 0, 0, 0));
+    gametime = gametime.getTime() / 100000;
     var position = document.getElementById("appointment_position").value;
     console.log(player1ID + ", " + gametime + ", " + position);
-    $.ajax({
-      url:  "/appointments/createAppt",
-      type: "post",
-      dataType: "json",
-      data: {"player1ID": player1ID, "gametime": gametime, "position":position},
-      success: function(data){
-        if(data.status == 1){
-          appointmentCancel();
-        }else{
-          document.getElementById("appointment_fail").style.display = "block";
+    if(isNaN(gametime) || curtime > gametime ){
+      document.getElementById("appointment_gamedate").value = "";
+      document.getElementById("appointment_timepicker").value = "0";
+    }else{
+      $.ajax({
+        url:  "/appointments/createAppt",
+        type: "post",
+        dataType: "json",
+        data: {"player1ID": player1ID, "gametime": gametime, "position":position},
+        success: function(data){
+          if(data.status == 1){
+            appointmentCancel();
+          }else{
+            document.getElementById("appointment_fail").style.display = "block";
+          }
         }
-      }
-    });
+      });
+    }
   }
   function appointmentCancel(){
-    document.getElementById("appointment_gametime").value = "";
+    document.getElementById("appointment_gamedate").value = "";
+    document.getElementById("appointment_timepicker").value = "0";
     document.getElementById("appointment_position").value = "";
     document.getElementById("appointmentWindow").style.display = "none";
     document.getElementById("appointment_fail").style.display = "none";
+    document.getElementById("appointment_window_container").style.display = "block";
   }
   function appointmentAppear(){
-
+    document.getElementById("appointmentWindow").style.display = "block";
+    document.getElementById("appointment_window_container").style.display = "none";
   }

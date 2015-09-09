@@ -11,10 +11,8 @@
     %link(href="/assets/bootstrap.css" rel="stylesheet")
     %link(href="/assets/bootstrap-theme.css" rel="stylesheet")
     %link(href="/assets/LOLStyle.css" rel="stylesheet")
-
     %link(href="/assets/font-awesome.min.css" rel="stylesheet")
-    %script{:src => "/assets/bootstrap.min.js"}
-    %script{:src => "/assets/LOL.js"}
+    %link{:href => "http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css", :rel => "stylesheet"}
 
   %body.layoutBackground
     %div{style:"text-align:center"}
@@ -34,7 +32,7 @@
         %a.li.list-group-item(href="/galleries")League Gallery
         - if user_signed_in?
           %a.li.list-group-item Game Records
-          %a.li.list-group-item Appointments
+          %a.li.list-group-item(href="/appointments") Appointments
           %a.li.list-group-item(href="/users/edit") Update My Info
           %a.li.list-group-item(href="#{destroy_user_session_path}" data-method="delete") Sign out
         - else
@@ -97,6 +95,11 @@
 
     .fheight#layoutMain
       = yield
+
+    %script{:src => "/assets/bootstrap.min.js"}
+    %script{:src => "/assets/LOL.js"}
+    %script{:src => "http://code.jquery.com/ui/1.11.4/jquery-ui.js"}
+
   %footer
     .col-lg-8.col-md-8.col-sm-8.col-xs-12{style:"padding-top: 4%"}
       Copyright © 2015 Lu Zou

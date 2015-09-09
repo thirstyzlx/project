@@ -4,34 +4,8 @@
 -else
   %div#appointment_window_container
     %a.btn.btn-lg.btn-primary.btn-info.btn-block(href="javascript: appointmentAppear();") Create a Duo Game Appointment
-  .botItem
-    .col-lg-2.aptTile
-      .circle-tile
-        .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank5.png')"}
-          5
-        .circle-tile-content
-          .circle-tile-description.text-faded
-            Garen - AD Carry
-          .circle-tile-number.text-faded
-            2015-08-12 18:00
-          %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=garen"}
-            Player Info
-            %i.fa.fa-chevron-circle-right
 
-    .col-lg-2.aptTile
-      .circle-tile
-        .circle-tile-heading.aptCircle{style:"background-image:url('/assets/rank4.png')"}
-          5
-        .circle-tile-content
-          .circle-tile-description.text-faded
-            Waxwam - AP Carry
-          .circle-tile-number.text-faded
-            2015-08-12 19:00
-          %a.circle-tile-footer{:href => "http://na.op.gg/summoner/userName=waxwam"}
-            Player Info
-            %i.fa.fa-chevron-circle-right
-
-  .topItem#appointmentWindow{style:"display:none; text-align:center; width: 40%; margin-left: 30%; position: absolute; background-color:rgba(0, 0, 0, 0.6);"}
+  .topItem#appointmentWindow{style:"display:none; text-align:center; width: 60%; margin-left: 20%; position: absolute; background-color:rgba(0, 0, 0, 0.6);"}
     %h2{style:"color:gold; margin: auto;"} Create a Duo Appointment
     %hr
     %div
@@ -87,10 +61,12 @@
           %a.btn.btn-lg.btn-warning(href="javascript: appointmentCancel();") Cancel
           %a.btn.btn-lg.btn-primary(href="javascript: appointmentSubmit();") Submit
 
+  .botItem#allAppointments
 
 :javascript
   $(document).ready(function(){
     $( "#appointment_gamedate" ).datepicker();
+    loadAllAppointments();
   });
 
   function appointmentSubmit(){
@@ -115,6 +91,7 @@
         data: {"player1ID": player1ID, "gametime": gametime, "position":position},
         success: function(data){
           if(data.status == 1){
+            loadAllAppointments();
             appointmentCancel();
           }else{
             document.getElementById("appointment_fail").style.display = "block";
@@ -134,4 +111,51 @@
   function appointmentAppear(){
     document.getElementById("appointmentWindow").style.display = "block";
     document.getElementById("appointment_window_container").style.display = "none";
+  }
+
+  function loadAppointments(rankb, ranks, player1, time, position, rankBadge){
+    var offset = new Date().getTimezoneOffset();
+    time = time * 100000 + offset*60*1000;
+    var timestr = new Date(time);
+    timestr = timestr.toString();
+    var html = "<div class='col-lg-2 aptTile'>" +
+                 "<div class='circle-tile'>" +
+                   "<div class='circle-tile-heading aptCircle' style='background-image:url(" + rankBadge + ")'>" +
+                     ranks +
+                   "</div>" +
+                   "<div class='circle-tile-content'>" +
+                     "<div class='circle-tile-description text-faded'>" +
+                       player1 + " - " + position +
+                     "</div>" +
+                     "<div class='circle-tile-number text-faded'>" +
+                       timestr.substring(0,21) +
+                     "</div>" +
+                     "<a class='circle-tile-footer' href='http://na.op.gg/summoner/userName=" + player1 + "'>" +
+                       "Player Info" +
+                         "<i class='fa fa-chevron-circle-right'></i>" +
+                     "</a>" +
+                   "</div>" +
+                 "</div>" +
+               "</div>";
+    return html;
+  }
+
+  function loadAllAppointments(){
+    $.ajax({
+      url:  "/appointments/getAppt",
+      type: "get",
+      dataType: "json",
+      success: function(data){
+        console.log(data);
+        var html = "<div class=row>";
+        for(var i = 0; i < data.allAppts.length; i++){
+          if(i % 6 == 0){
+            html = html + "</div><div class=row>";
+          }
+          var anappt = data.allAppts[i];
+          html = html + loadAppointments(anappt.rankb, anappt.ranks, anappt.player1ID, anappt.gametime, anappt.position, anappt.rankBadge);
+        }
+        $("#allAppointments").html(html);
+      }
+    });
   }

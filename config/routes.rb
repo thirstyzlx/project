@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post "/appointments/createAppt" => "appointments#createAppt"
+  get "/appointments/getAppt" => "appointments#getAppt"
 
   resources :appointments
   resources :galleries

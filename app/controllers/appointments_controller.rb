@@ -49,6 +49,18 @@ class AppointmentsController < ApplicationController
       render json: {status: 0}.to_json
     end
   end
+
+  def getAppt
+    appt = Appointment.all.order(gametime: :asc)
+    apptarray = []
+    for each in appt
+      aplayer = User.find_by_game_id(each.player1ID)
+      anappt = {gametime: each.gametime, player1ID: each.player1ID, position:each.position, rankb: aplayer.rankb, ranks:aplayer.ranks, rankBadge:aplayer.rankBadge}
+      apptarray.push(anappt)
+    end
+    render json: {allAppts: apptarray}.to_json
+  end
+
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update

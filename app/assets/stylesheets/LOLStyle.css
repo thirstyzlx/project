@@ -216,3 +216,13 @@ html {
     opacity: 1.0;
     padding-top:1%;
 }
+
+.thMyAppt {
+    color: gold;
+    font-size: 18px;
+}
+
+.thMyAppt2 {
+    color: deepskyblue;
+    font-size: 20px;
+}

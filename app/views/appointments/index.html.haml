@@ -70,7 +70,9 @@
   });
 
   function appointmentSubmit(){
+  //need to convert curtime to UTC
     var curtime = new Date(Date.now());
+    //curtime = Date.UTC(curTime);
     curtime = curtime.getTime() / 100000;
     var player1ID = document.getElementById("appointment_player1ID").value;
     var gamedate = document.getElementById("appointment_gamedate").value;
@@ -113,12 +115,14 @@
     document.getElementById("appointment_window_container").style.display = "none";
   }
 
-  function loadAppointments(rankb, ranks, player1, time, position, rankBadge){
+  function loadAppointments(rankb, ranks, player1, time, position, rankBadge, apptID){
     var offset = new Date().getTimezoneOffset();
     time = time * 100000 + offset*60*1000;
     var timestr = new Date(time);
     timestr = timestr.toString();
-    var html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile'>" +
+    var pname = "appointment_join_" + player1 + time;
+    pname = pname.replace(/\s+/g,"")
+    var html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile' onmouseover=showElement('" + pname + "') onmouseleave=hideElement('" + pname + "')>" +
                  "<div class='circle-tile'>" +
                    "<div class='circle-tile-heading aptCircle' style='background-image:url(" + rankBadge + ")'>" +
                      ranks +
@@ -134,6 +138,7 @@
                        "Player Info" +
                          "<i class='fa fa-chevron-circle-right'></i>" +
                      "</a>" +
+                     "<a class='btn btn-info' style='display:none' id='" + pname + "' href='javascript: joinAppointment(" + apptID + ")'> Join </a>" +
                    "</div>" +
                  "</div>" +
                "</div>";
@@ -141,21 +146,40 @@
   }
 
   function loadAllAppointments(){
+    //get curtime in UTC with request
+    var curtime = new Date(Date.now());
+    curtime = timeToUTC(curtime);
+    curtime = Math.round(curtime / 100000);
+
     $.ajax({
       url:  "/appointments/getAppt",
       type: "get",
       dataType: "json",
+      data: {curtime: curtime},
       success: function(data){
-        console.log(data);
         var html = "<div class=row>";
         for(var i = 0; i < data.allAppts.length; i++){
           if(i % 6 == 0){
             html = html + "</div><div class=row>";
           }
           var anappt = data.allAppts[i];
-          html = html + loadAppointments(anappt.rankb, anappt.ranks, anappt.player1ID, anappt.gametime, anappt.position, anappt.rankBadge);
+          html = html + loadAppointments(anappt.rankb, anappt.ranks, anappt.player1ID, anappt.gametime, anappt.position, anappt.rankBadge, anappt.apptID);
         }
         $("#allAppointments").html(html);
+      }
+    });
+  }
+
+  function joinAppointment(id){
+    $.ajax({
+      url: "/appointments/joinAppt",
+      type: "put",
+      dataType: "json",
+      data: {apptID: id},
+      success: function(data){
+        if(data.status == 1){
+          loadAllAppointments();
+        }
       }
     });
   }

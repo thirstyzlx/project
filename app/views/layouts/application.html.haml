@@ -29,11 +29,12 @@
     %div#layoutSideMenu{style:"display:none"}
       %ul.list-group
         %a.li.list-group-item(href="/") Main Menu
-        %a.li.list-group-item(href="/galleries")League Gallery
+
         - if user_signed_in?
-          %a.li.list-group-item Game Records
-          %a.li.list-group-item(href="/appointments") Appointments
-          %a.li.list-group-item(href="/users/edit") Update My Info
+          %a.li.list-group-item(href="/users/edit") Dashboard
+          %a.li.list-group-item(href="http://na.op.gg/summoner/userName=#{current_user.game_id}") Game Records
+          %a.li.list-group-item(href="/appointments") Make Appointments
+          %a.li.list-group-item(href="/galleries") League Gallery
           %a.li.list-group-item(href="#{destroy_user_session_path}" data-method="delete") Sign out
         - else
           %div

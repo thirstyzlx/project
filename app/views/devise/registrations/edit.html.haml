@@ -7,11 +7,23 @@
     %div
       %ul.nav.nav-tabs{:role=>"tablist"}
         %li.active{:role => "presentation" }
+          %a(aria-controls="mi_my_appointments" data-toggle="tab"){:href => "#mi_my_appointments", :role=>"tab"} My Appointments
+        %li{:role => "presentation" }
           %a(aria-controls="mi_change_password" data-toggle="tab"){:href => "#mi_change_password", :role=>"tab"} Change Password
         %li{:role => "presentation"}
           %a(aria-controls="mi_update_my_info" data-toggle="tab"){:href => "#mi_update_my_info", :role=>"tab"} Update My Info
       .tab-content{:style=>"padding-left: 10px"}
-        %div.tab-pane.active#mi_change_password{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
+        %div.tab-pane.active#mi_my_appointments{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
+          %h2{style:"color: deepskyblue"} My Appointments
+          %table.table{style:"background-color:rgba(0, 0, 0, 0.6);"}
+            %tr
+              %th.thMyAppt2 Time
+              %th.thMyAppt2 Player1
+              %th.thMyAppt2 Player2
+              %th.thMyAppt2 Action
+            %tbody#mi_my_appointments_tbody
+
+        %div.tab-pane#mi_change_password{:role=>"tabpanel", style:"padding:1%;width:60%;margin: auto"}
           %h2{style:"color: deepskyblue"} Change Password
           %form#mi_edit_password.edit_account{"accept-charset" => "UTF-8", :action => "/users", :method => "post", :autocomplete => "off"}
             %div{:style => "margin:0;padding:0;display:inline"}
@@ -57,8 +69,45 @@
             .pull-right
               %input.btn.btn-lg.btn-primary{:name => "commit", :type => "submit", :value => "Update"}
 
+
 :javascript
    $(document).ready(function(){
       document.getElementById("mi_user_rankb").value = "#{current_user.rankb}";
       document.getElementById("mi_user_ranks").value = #{current_user.ranks};
+      loadMyAppointments();
    })
+
+   function loadMyAppointments(){
+       //get curtime in UTC with request
+       var curtime = new Date(Date.now());
+       curtime = timeToUTC(curtime);
+       curtime = Math.round(curtime / 100000);
+
+       $.ajax({
+         url:  "/appointments/getMyAppt",
+         type: "get",
+         dataType: "json",
+         data: {curtime: curtime},
+         success: function(data){
+           var html = "";
+           for(var i = 0; i < data.allAppts.length; i++){
+             var arow = loadOneAppointment(data.allAppts[i].player1ID, data.allAppts[i].player2ID, data.allAppts[i].gametime, data.allAppts[i].apptID);
+             html = html + arow;
+           }
+           console.log(html);
+           $("#mi_my_appointments_tbody").html(html);
+         }
+       });
+   }
+
+   function loadOneAppointment(player1, player2, time, id){
+     var offset = new Date().getTimezoneOffset();
+     time = time * 100000 + offset*60*1000;
+     var timestr = new Date(time);
+     timestr = timestr.toString();
+     var html = "<tr><th class='thMyAppt'>" + timestr.substring(0,21) + "</th>" +
+                "<th class='thMyAppt'>" + player1 + "</th>" +
+                "<th class='thMyAppt'>" + player2 + "</th>" +
+                "<th class='thMyAppt'>" + "Action" + "</th></tr>";
+     return html;
+   }

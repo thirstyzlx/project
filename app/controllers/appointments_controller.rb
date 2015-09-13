@@ -51,14 +51,38 @@ class AppointmentsController < ApplicationController
   end
 
   def getAppt
-    appt = Appointment.all.order(gametime: :asc)
+    # use curtime to filter, only show records with player2ID==""
+    appt = Appointment.where(player2ID: nil).where("gametime >= ?", params[:curtime]).order(gametime: :asc)
     apptarray = []
     for each in appt
       aplayer = User.find_by_game_id(each.player1ID)
-      anappt = {gametime: each.gametime, player1ID: each.player1ID, position:each.position, rankb: aplayer.rankb, ranks:aplayer.ranks, rankBadge:aplayer.rankBadge}
+      anappt = {gametime: each.gametime, player1ID: each.player1ID, position:each.position, rankb: aplayer.rankb, ranks:aplayer.ranks, rankBadge:aplayer.rankBadge, apptID: each.id}
       apptarray.push(anappt)
     end
     render json: {allAppts: apptarray}.to_json
+  end
+
+  def getMyAppt
+    # use curtime to filter, only show records with player2ID==""
+    appt = Appointment.where.not(player2ID: nil).where("gametime >= ? and (player1ID = ? or player2ID = ?)", params[:curtime], current_user.game_id, current_user.game_id).order(gametime: :asc)
+    apptarray = []
+    for each in appt
+      aplayer = User.find_by_game_id(each.player1ID)
+      anappt = {gametime: each.gametime, player1ID: each.player1ID, player2ID: each.player2ID, apptID: each.id}
+      apptarray.push(anappt)
+    end
+    render json: {allAppts: apptarray}.to_json
+  end
+
+  def joinAppt
+    appt = Appointment.find_by_id(params[:apptID])
+    if not(appt.player1ID == current_user.game_id)
+      appt.player2ID = current_user.game_id
+      appt.save
+      render json: {status: 1}.to_json
+    else
+      render json: {status: 0}.to_json
+    end
   end
 
   # PATCH/PUT /appointments/1

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get "/appointments/getAppt" => "appointments#getAppt"
   get "/appointments/getMyAppt" => "appointments#getMyAppt"
   put "/appointments/joinAppt" => "appointments#joinAppt"
+  put "/appointments/cancelAppt" => "appointments#cancelAppt"
 
   resources :appointments
   resources :galleries

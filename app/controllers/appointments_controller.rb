@@ -85,6 +85,21 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def cancelAppt
+    appt = Appointment.find_by_id(params[:apptID])
+    if appt.player1ID == current_user.game_id
+      appt.player1ID = appt.player2ID
+      appt.player2ID = nil
+    elsif appt.player2ID == current_user.game_id
+      appt.player2ID = nil
+    end
+    if appt.save
+      render json: {status: 1}.to_json
+    else
+      render json: {status: 2}.to_json
+    end
+  end
+
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update

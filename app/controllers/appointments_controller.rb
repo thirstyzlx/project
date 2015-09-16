@@ -50,6 +50,18 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def getApptByPage
+    # use curtime to filter, only show records with player2ID==""
+    appt = Appointment.where(player2ID: nil).where("gametime >= ?", params[:curtime]).order(gametime: :asc)
+    apptarray = []
+    for each in appt
+      aplayer = User.find_by_game_id(each.player1ID)
+      anappt = {gametime: each.gametime, player1ID: each.player1ID, position:each.position, rankb: aplayer.rankb, ranks:aplayer.ranks, rankBadge:aplayer.rankBadge, apptID: each.id}
+      apptarray.push(anappt)
+    end
+    render json: {allAppts: apptarray}.to_json
+  end
+
   def getAppt
     # use curtime to filter, only show records with player2ID==""
     appt = Appointment.where(player2ID: nil).where("gametime >= ?", params[:curtime]).order(gametime: :asc)
@@ -72,6 +84,17 @@ class AppointmentsController < ApplicationController
       apptarray.push(anappt)
     end
     render json: {allAppts: apptarray}.to_json
+  end
+
+  def getTotalPage
+    appt = 0;
+    if params[:pageState] == "0"
+      appt = Appointment.where(player2ID: nil).where("gametime >= ?", params[:curtime]).count
+    elsif params[:pageState] == "1"
+      appt = Appointment.where("(player1ID = ? or player2ID=?) and gametime >= ?", current_user.game_id, current_user.game_id, params[:curtime]).count
+    end
+    appt = (appt / 12.0).ceil
+    render json: {totalApptPage: appt}.to_json
   end
 
   def joinAppt

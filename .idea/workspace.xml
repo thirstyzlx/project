@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0a4a460-beca-4518-8098-ff8d05e424a3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/database.yml" afterPath="$PROJECT_DIR$/config/database.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/LOL.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/LOL.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/log/development.log" afterPath="$PROJECT_DIR$/log/development.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/appointments/index.html.haml" afterPath="$PROJECT_DIR$/app/views/appointments/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="project.iws" />
@@ -38,25 +42,25 @@
       <file leaf-file-name="edit.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="4" selection-start="6296" selection-end="6296" vertical-scroll-proportion="-17.458334" vertical-offset="1486" max-vertical-offset="1995">
+            <state line="81" column="1" selection-start="4674" selection-end="4799" vertical-scroll-proportion="-6.8333335" vertical-offset="1051" max-vertical-offset="1995">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="database.yml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/database.yml">
+      <file leaf-file-name="index.html.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/appointments/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="3" selection-start="369" selection-end="369" vertical-scroll-proportion="0.46703297" vertical-offset="0" max-vertical-offset="900">
+            <state line="111" column="21" selection-start="5185" selection-end="5185" vertical-scroll-proportion="0.3222004" vertical-offset="1501" max-vertical-offset="3300">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/mains/index.html.haml">
+      <file leaf-file-name="LOL.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/LOL.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="43" selection-start="823" selection-end="823" vertical-scroll-proportion="-2.4583333" vertical-offset="106" max-vertical-offset="615">
+            <state line="27" column="0" selection-start="608" selection-end="608" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
               <folding />
             </state>
           </provider>
@@ -65,23 +69,17 @@
       <file leaf-file-name="LOLStyle.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="197" column="28" selection-start="3483" selection-end="3483" vertical-scroll-proportion="0.0" vertical-offset="2903" max-vertical-offset="3495">
+            <state line="232" column="17" selection-start="3956" selection-end="3956" vertical-scroll-proportion="0.0" vertical-offset="3039" max-vertical-offset="3585">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="appointments_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/appointments_controller.rb">
+      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/mains/index.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="38" selection-start="3072" selection-end="3072" vertical-scroll-proportion="0.0" vertical-offset="1162" max-vertical-offset="2145">
-              <folding>
-                <marker date="1442253507000" expanded="true" signature="130:176" placeholder="#..." />
-                <marker date="1442253507000" expanded="true" signature="234:284" placeholder="#..." />
-                <marker date="1442253507000" expanded="true" signature="430:478" placeholder="#..." />
-                <marker date="1442253507000" expanded="true" signature="2722:3086" placeholder=" ... end" />
-                <marker date="1442253507000" expanded="true" signature="2973:3080" placeholder="if ... end" />
-              </folding>
+            <state line="13" column="71" selection-start="998" selection-end="998" vertical-scroll-proportion="-3.7083333" vertical-offset="106" max-vertical-offset="615">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,7 +87,7 @@
       <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="32" selection-start="276" selection-end="302" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
+            <state line="4" column="53" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
               <folding />
             </state>
           </provider>
@@ -122,16 +120,16 @@
         <option value="$PROJECT_DIR$/db/migrate/20150828092000_add_rank_to_appointments.rb" />
         <option value="$PROJECT_DIR$/app/controllers/users/registrations_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/mains/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/LOL.js" />
         <option value="$PROJECT_DIR$/app/views/appointments/show.html.haml" />
         <option value="$PROJECT_DIR$/app/views/appointments/myAppt.html.haml" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css" />
-        <option value="$PROJECT_DIR$/app/views/appointments/index.html.haml" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/appointments_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/devise/registrations/edit.html.haml" />
         <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/LOL.js" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css" />
+        <option value="$PROJECT_DIR$/app/views/appointments/index.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/appointments_controller.rb" />
       </list>
     </option>
   </component>
@@ -165,8 +163,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="RailsProjectView" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -270,6 +266,10 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -285,7 +285,69 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="appointments" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -309,6 +371,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="RailsProjectView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -513,10 +577,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32943925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32943925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -526,7 +590,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943925" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25751072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26466382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -563,9 +627,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/appointments/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="9" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="525">
-          <folding />
-        </state>
+        <state line="20" column="9" selection-start="696" selection-end="696" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="525" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/appointment.rb">
@@ -762,37 +824,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/update.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/LOL.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="28" selection-start="295" selection-end="295" vertical-scroll-proportion="0.34416825" vertical-offset="0" max-vertical-offset="523">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/appointments/show.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="249" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="249" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="499" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/appointments/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="11" selection-start="7639" selection-end="7639" vertical-scroll-proportion="3.808642" vertical-offset="594" max-vertical-offset="2850">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="197" column="28" selection-start="3483" selection-end="3483" vertical-scroll-proportion="0.0" vertical-offset="2903" max-vertical-offset="3495">
-          <folding />
-        </state>
+        <state line="17" column="3" selection-start="369" selection-end="369" vertical-scroll-proportion="0.37728938" vertical-offset="49" max-vertical-offset="900" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.haml">
@@ -802,43 +844,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/mains/index.html.haml">
+    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="43" selection-start="823" selection-end="823" vertical-scroll-proportion="-2.4583333" vertical-offset="106" max-vertical-offset="615">
+        <state line="81" column="1" selection-start="4674" selection-end="4799" vertical-scroll-proportion="-6.8333335" vertical-offset="1051" max-vertical-offset="1995">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="32" selection-start="276" selection-end="302" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1095">
+        <state line="4" column="53" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1125">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/appointments_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="38" selection-start="3072" selection-end="3072" vertical-scroll-proportion="0.0" vertical-offset="1162" max-vertical-offset="2145">
-          <folding>
-            <marker date="1442253507000" expanded="true" signature="130:176" placeholder="#..." />
-            <marker date="1442253507000" expanded="true" signature="234:284" placeholder="#..." />
-            <marker date="1442253507000" expanded="true" signature="430:478" placeholder="#..." />
-            <marker date="1442253507000" expanded="true" signature="2722:3086" placeholder=" ... end" />
-            <marker date="1442253507000" expanded="true" signature="2973:3080" placeholder="if ... end" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/edit.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="4" selection-start="6296" selection-end="6296" vertical-scroll-proportion="-17.458334" vertical-offset="1486" max-vertical-offset="1995">
+        <state line="95" column="20" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.3529412" vertical-offset="1245" max-vertical-offset="2490">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.yml">
+    <entry file="file://$PROJECT_DIR$/app/views/mains/index.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="3" selection-start="369" selection-end="369" vertical-scroll-proportion="0.46703297" vertical-offset="0" max-vertical-offset="900">
+        <state line="13" column="71" selection-start="998" selection-end="998" vertical-scroll-proportion="-3.7083333" vertical-offset="106" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/LOLStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="232" column="17" selection-start="3956" selection-end="3956" vertical-scroll-proportion="0.0" vertical-offset="3047" max-vertical-offset="3585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/LOL.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="608" selection-end="608" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/appointments/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="111" column="21" selection-start="5185" selection-end="5185" vertical-scroll-proportion="0.3222004" vertical-offset="1501" max-vertical-offset="3300">
           <folding />
         </state>
       </provider>

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/appointments/getMyAppt" => "appointments#getMyAppt"
   put "/appointments/joinAppt" => "appointments#joinAppt"
   put "/appointments/cancelAppt" => "appointments#cancelAppt"
+  get "/appointments/getTotalPage" => "appointments#getTotalPage"
+
 
   resources :appointments
   resources :galleries

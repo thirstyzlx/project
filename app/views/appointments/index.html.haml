@@ -63,9 +63,30 @@
 
   .botItem#allAppointments
 
+  %div#appointment_pages.btn-toolbar{:role => "toolbar", style:"width: 100%; text-align: center"}
+
+
 :javascript
   $(document).ready(function(){
-    $( "#appointment_gamedate" ).datepicker();
+    var curtime = new Date(Date.now());
+    curtime = timeToUTC(curtime);
+    curtime = Math.round(curtime / 100000);
+    $.ajax({
+      url: "/appointments/getTotalPage",
+      type: "get",
+      dataType: "json",
+      data: {pageState: 0, curtime: curtime},
+      success: function(data){
+        var totalPage = data.totalApptPage;
+        var pageBtn = "";
+        console.log(totalPage);
+        for(var i = 0; i < totalPage; i++){
+          pageBtn = pageBtn + "<div class='btn btn-default' type='button'>" + (i+1) + "</div>";
+          $("#appointment_pages").html(pageBtn);
+        }
+      }
+    });
+    $("#appointment_gamedate").datepicker();
     loadAllAppointments();
   });
 
@@ -121,8 +142,14 @@
     var timestr = new Date(time);
     timestr = timestr.toString();
     var pname = "appointment_join_" + player1 + time;
-    pname = pname.replace(/\s+/g,"")
-    var html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile' onmouseover=showElement('" + pname + "') onmouseleave=hideElement('" + pname + "')>" +
+    pname = pname.replace(/\s+/g,"");
+    var html = "";
+    if("#{current_user.game_id}" == player1){
+      html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile'>";
+    }else{
+      html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile' onmouseover=showElement('" + pname + "') onmouseleave=hideElement('" + pname + "')>";
+    }
+    html =  html +
                  "<div class='circle-tile'>" +
                    "<div class='circle-tile-heading aptCircle' style='background-image:url(" + rankBadge + ")'>" +
                      ranks +
@@ -137,8 +164,11 @@
                      "<a class='circle-tile-footer' href='http://na.op.gg/summoner/userName=" + player1 + "'>" +
                        "Player Info" +
                          "<i class='fa fa-chevron-circle-right'></i>" +
-                     "</a>" +
-                     "<a class='btn btn-info' style='display:none' id='" + pname + "' href='javascript: joinAppointment(" + apptID + ")'> Join </a>" +
+                     "</a>";
+    if("#{current_user.game_id}" != player1){
+      html = html + "<a class='btn btn-info' style='display:none' id='" + pname + "' href='javascript: joinAppointment(" + apptID + ")'> Join </a>";
+    }
+    html = html +
                    "</div>" +
                  "</div>" +
                "</div>";

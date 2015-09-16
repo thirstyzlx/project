@@ -226,3 +226,9 @@ html {
     color: deepskyblue;
     font-size: 20px;
 }
+
+.pageButton{
+    color: deepskyblue;
+    opacity: 0.8;
+    margin: auto;
+}

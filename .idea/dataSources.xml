@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2768835633">
+    <data-source source="LOCAL" name="Rails project: development" uuid="05f19025-a982-4752-8061-6898c72537cb">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/LOL_development</jdbc-url>
+      <user-name>root</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails project: test" uuid="8c13d0f7-4b19-4ffe-a027-e49a57561f2e">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/LOL_test</jdbc-url>
+      <user-name>root</user-name>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails project: production" uuid="c10ccb57-0aed-4d80-aa6f-07cdb21c064d">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/LOL_production</jdbc-url>
+      <user-name>LOL</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddfe6dfe5dfe6dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

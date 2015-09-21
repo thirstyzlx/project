@@ -66,150 +66,150 @@
   %div#appointment_pages.btn-toolbar{:role => "toolbar", style:"width: 100%; text-align: center"}
 
 
-:javascript
-  $(document).ready(function(){
-    var curtime = new Date(Date.now());
-    curtime = timeToUTC(curtime);
-    curtime = Math.round(curtime / 100000);
-    $.ajax({
-      url: "/appointments/getTotalPage",
-      type: "get",
-      dataType: "json",
-      data: {pageState: 0, curtime: curtime},
-      success: function(data){
-        var totalPage = data.totalApptPage;
-        var pageBtn = "";
-        console.log(totalPage);
-        for(var i = 0; i < totalPage; i++){
-          pageBtn = pageBtn + "<div class='btn btn-default' type='button'>" + (i+1) + "</div>";
-          $("#appointment_pages").html(pageBtn);
+  :javascript
+    $(document).ready(function(){
+      var curtime = new Date(Date.now());
+      curtime = timeToUTC(curtime);
+      curtime = Math.round(curtime / 100000);
+      $.ajax({
+        url: "/appointments/getTotalPage",
+        type: "get",
+        dataType: "json",
+        data: {pageState: 0, curtime: curtime},
+        success: function(data){
+          var totalPage = data.totalApptPage;
+          var pageBtn = "";
+          console.log(totalPage);
+          for(var i = 0; i < totalPage; i++){
+            pageBtn = pageBtn + "<div class='btn btn-default' type='button'>" + (i+1) + "</div>";
+            $("#appointment_pages").html(pageBtn);
+          }
         }
-      }
+      });
+      $("#appointment_gamedate").datepicker();
+      loadAllAppointments();
     });
-    $("#appointment_gamedate").datepicker();
-    loadAllAppointments();
-  });
 
-  function appointmentSubmit(){
-  //need to convert curtime to UTC
-    var curtime = new Date(Date.now());
-    //curtime = Date.UTC(curTime);
-    curtime = curtime.getTime() / 100000;
-    var player1ID = document.getElementById("appointment_player1ID").value;
-    var gamedate = document.getElementById("appointment_gamedate").value;
-    gamedate = gamedate.split("/");
-    var gamehour = document.getElementById("appointment_timepicker").value;
-    var gametime = new Date(Date.UTC(gamedate[2], gamedate[0]-1, gamedate[1], gamehour, 0, 0, 0));
-    gametime = gametime.getTime() / 100000;
-    var position = document.getElementById("appointment_position").value;
-    console.log(player1ID + ", " + gametime + ", " + position);
-    if(isNaN(gametime) || curtime > gametime ){
+    function appointmentSubmit(){
+    //need to convert curtime to UTC
+      var curtime = new Date(Date.now());
+      //curtime = Date.UTC(curTime);
+      curtime = curtime.getTime() / 100000;
+      var player1ID = document.getElementById("appointment_player1ID").value;
+      var gamedate = document.getElementById("appointment_gamedate").value;
+      gamedate = gamedate.split("/");
+      var gamehour = document.getElementById("appointment_timepicker").value;
+      var gametime = new Date(Date.UTC(gamedate[2], gamedate[0]-1, gamedate[1], gamehour, 0, 0, 0));
+      gametime = gametime.getTime() / 100000;
+      var position = document.getElementById("appointment_position").value;
+      console.log(player1ID + ", " + gametime + ", " + position);
+      if(isNaN(gametime) || curtime > gametime ){
+        document.getElementById("appointment_gamedate").value = "";
+        document.getElementById("appointment_timepicker").value = "0";
+      }else{
+        $.ajax({
+          url:  "/appointments/createAppt",
+          type: "post",
+          dataType: "json",
+          data: {"player1ID": player1ID, "gametime": gametime, "position":position},
+          success: function(data){
+            if(data.status == 1){
+              loadAllAppointments();
+              appointmentCancel();
+            }else{
+              document.getElementById("appointment_fail").style.display = "block";
+            }
+          }
+        });
+      }
+    }
+    function appointmentCancel(){
       document.getElementById("appointment_gamedate").value = "";
       document.getElementById("appointment_timepicker").value = "0";
-    }else{
+      document.getElementById("appointment_position").value = "";
+      document.getElementById("appointmentWindow").style.display = "none";
+      document.getElementById("appointment_fail").style.display = "none";
+      document.getElementById("appointment_window_container").style.display = "block";
+    }
+    function appointmentAppear(){
+      document.getElementById("appointmentWindow").style.display = "block";
+      document.getElementById("appointment_window_container").style.display = "none";
+    }
+
+    function loadAppointments(rankb, ranks, player1, time, position, rankBadge, apptID){
+      var offset = new Date().getTimezoneOffset();
+      time = time * 100000 + offset*60*1000;
+      var timestr = new Date(time);
+      timestr = timestr.toString();
+      var pname = "appointment_join_" + player1 + time;
+      pname = pname.replace(/\s+/g,"");
+      var html = "";
+      if("#{current_user.game_id}" == player1){
+        html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile'>";
+      }else{
+        html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile' onmouseover=showElement('" + pname + "') onmouseleave=hideElement('" + pname + "')>";
+      }
+      html =  html +
+                   "<div class='circle-tile'>" +
+                     "<div class='circle-tile-heading aptCircle' style='background-image:url(" + rankBadge + ")'>" +
+                       ranks +
+                     "</div>" +
+                     "<div class='circle-tile-content'>" +
+                       "<div class='circle-tile-description text-faded'>" +
+                         player1 + " - " + position +
+                       "</div>" +
+                       "<div class='circle-tile-number text-faded'>" +
+                         timestr.substring(0,21) +
+                       "</div>" +
+                       "<a class='circle-tile-footer' href='http://na.op.gg/summoner/userName=" + player1 + "'>" +
+                         "Player Info" +
+                           "<i class='fa fa-chevron-circle-right'></i>" +
+                       "</a>";
+      if("#{current_user.game_id}" != player1){
+        html = html + "<a class='btn btn-info' style='display:none' id='" + pname + "' href='javascript: joinAppointment(" + apptID + ")'> Join </a>";
+      }
+      html = html +
+                     "</div>" +
+                   "</div>" +
+                 "</div>";
+      return html;
+    }
+
+    function loadAllAppointments(){
+      //get curtime in UTC with request
+      var curtime = new Date(Date.now());
+      curtime = timeToUTC(curtime);
+      curtime = Math.round(curtime / 100000);
+
       $.ajax({
-        url:  "/appointments/createAppt",
-        type: "post",
+        url:  "/appointments/getAppt",
+        type: "get",
         dataType: "json",
-        data: {"player1ID": player1ID, "gametime": gametime, "position":position},
+        data: {curtime: curtime},
+        success: function(data){
+          var html = "<div class=row>";
+          for(var i = 0; i < data.allAppts.length; i++){
+            if(i % 6 == 0){
+              html = html + "</div><div class=row>";
+            }
+            var anappt = data.allAppts[i];
+            html = html + loadAppointments(anappt.rankb, anappt.ranks, anappt.player1ID, anappt.gametime, anappt.position, anappt.rankBadge, anappt.apptID);
+          }
+          $("#allAppointments").html(html);
+        }
+      });
+    }
+
+    function joinAppointment(id){
+      $.ajax({
+        url: "/appointments/joinAppt",
+        type: "put",
+        dataType: "json",
+        data: {apptID: id},
         success: function(data){
           if(data.status == 1){
             loadAllAppointments();
-            appointmentCancel();
-          }else{
-            document.getElementById("appointment_fail").style.display = "block";
           }
         }
       });
     }
-  }
-  function appointmentCancel(){
-    document.getElementById("appointment_gamedate").value = "";
-    document.getElementById("appointment_timepicker").value = "0";
-    document.getElementById("appointment_position").value = "";
-    document.getElementById("appointmentWindow").style.display = "none";
-    document.getElementById("appointment_fail").style.display = "none";
-    document.getElementById("appointment_window_container").style.display = "block";
-  }
-  function appointmentAppear(){
-    document.getElementById("appointmentWindow").style.display = "block";
-    document.getElementById("appointment_window_container").style.display = "none";
-  }
-
-  function loadAppointments(rankb, ranks, player1, time, position, rankBadge, apptID){
-    var offset = new Date().getTimezoneOffset();
-    time = time * 100000 + offset*60*1000;
-    var timestr = new Date(time);
-    timestr = timestr.toString();
-    var pname = "appointment_join_" + player1 + time;
-    pname = pname.replace(/\s+/g,"");
-    var html = "";
-    if("#{current_user.game_id}" == player1){
-      html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile'>";
-    }else{
-      html = "<div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 aptTile' onmouseover=showElement('" + pname + "') onmouseleave=hideElement('" + pname + "')>";
-    }
-    html =  html +
-                 "<div class='circle-tile'>" +
-                   "<div class='circle-tile-heading aptCircle' style='background-image:url(" + rankBadge + ")'>" +
-                     ranks +
-                   "</div>" +
-                   "<div class='circle-tile-content'>" +
-                     "<div class='circle-tile-description text-faded'>" +
-                       player1 + " - " + position +
-                     "</div>" +
-                     "<div class='circle-tile-number text-faded'>" +
-                       timestr.substring(0,21) +
-                     "</div>" +
-                     "<a class='circle-tile-footer' href='http://na.op.gg/summoner/userName=" + player1 + "'>" +
-                       "Player Info" +
-                         "<i class='fa fa-chevron-circle-right'></i>" +
-                     "</a>";
-    if("#{current_user.game_id}" != player1){
-      html = html + "<a class='btn btn-info' style='display:none' id='" + pname + "' href='javascript: joinAppointment(" + apptID + ")'> Join </a>";
-    }
-    html = html +
-                   "</div>" +
-                 "</div>" +
-               "</div>";
-    return html;
-  }
-
-  function loadAllAppointments(){
-    //get curtime in UTC with request
-    var curtime = new Date(Date.now());
-    curtime = timeToUTC(curtime);
-    curtime = Math.round(curtime / 100000);
-
-    $.ajax({
-      url:  "/appointments/getAppt",
-      type: "get",
-      dataType: "json",
-      data: {curtime: curtime},
-      success: function(data){
-        var html = "<div class=row>";
-        for(var i = 0; i < data.allAppts.length; i++){
-          if(i % 6 == 0){
-            html = html + "</div><div class=row>";
-          }
-          var anappt = data.allAppts[i];
-          html = html + loadAppointments(anappt.rankb, anappt.ranks, anappt.player1ID, anappt.gametime, anappt.position, anappt.rankBadge, anappt.apptID);
-        }
-        $("#allAppointments").html(html);
-      }
-    });
-  }
-
-  function joinAppointment(id){
-    $.ajax({
-      url: "/appointments/joinAppt",
-      type: "put",
-      dataType: "json",
-      data: {apptID: id},
-      success: function(data){
-        if(data.status == 1){
-          loadAllAppointments();
-        }
-      }
-    });
-  }

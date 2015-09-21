@@ -30,8 +30,9 @@ html {
   background-size: 100%;
   background-repeat: repeat;
   background-attachment: scroll;
+  background-color: #000000;
   margin: auto;
-  background-image:url("/assets/back2.jpg");
+  /*background-image:url("/assets/back2.jpg");*/
 }
 
 .fheight{
@@ -75,10 +76,14 @@ html {
 /* entire container, keeps perspective */
 .flip-container {
     perspective: 1000;
+    -webkit-perspective: 1000;
 }
 /* flip the pane when hovered */
 .flip-container:hover .flipper, .flip-container.hover .flipper {
     transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    -o-transform:rotateY(180deg);
 }
 .flip-container, .front, .back {
     width: 100%;
@@ -88,15 +93,13 @@ html {
 .flipper {
     transition: 1.0s;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     position: relative;
 }
-/* hide back of pane during swap */
-.front, .back {
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+
+
 /* front pane, placed above back */
 .front {
     z-index: 10;
@@ -105,6 +108,18 @@ html {
 .back {
     z-index: 9;
     transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg);
+    -moz-transform:rotateY(180deg);
+    -o-transform:rotateY(180deg);
+}
+
+/* hide back of pane during swap */
+.front, .back{
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* for safari */
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .mainPanelMenu{

@@ -38,6 +38,8 @@ class AppointmentsController < ApplicationController
   end
 
   def createAppt
+    #filter, same time cannot be created
+
     appt = Appointment.new
     if params[:player1ID] == current_user.game_id and params[:gametime] != ""
       appt.gametime = params[:gametime]

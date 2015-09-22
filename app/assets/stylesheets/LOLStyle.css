@@ -28,11 +28,11 @@ html {
   width: auto;
   height: auto;
   background-size: 100%;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
   background-attachment: scroll;
   background-color: #000000;
   margin: auto;
-  /*background-image:url("/assets/back2.jpg");*/
+  background-image:url("/assets/back3.jpg");
 }
 
 .fheight{
@@ -130,42 +130,42 @@ html {
 }
 
 #mainBookDuoFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/DuoRank1.png");
 }
 #mainBookDuoFront:hover{
     opacity: 1.0;
 }
 #mainBookDuoBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/DuoRank2.png");
 }
 #mainBookDuoBack:hover{
     opacity: 1.0;
 }
 #mainGalleryFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/Gallery1.png");
 }
 #mainGalleryFront:hover{
     opacity: 1.0;
 }
 #mainGalleryBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/Gallery2.png");
 }
 #mainGalleryBack:hover{
     opacity: 1.0;
 }
 #mainTacticsFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/Tactics1.png");
 }
 #mainTacticsFront:hover{
     opacity: 1.0;
 }
 #mainTacticsBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/Tactics2.png");
 }
 #mainTacticsBack:hover{
@@ -175,39 +175,39 @@ html {
     opacity: 1.0;
 }
 #mainChampionItemFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/ChampionItem1.png");
 }
 #mainChampionItemFront:hover{
     opacity: 1.0;
 }
 #mainChampionItemBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/ChampionItem2.png");
 }
 #mainCurrentBattleFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/CurrentBattle1.png");
 }
 #mainCurrentBattleFront:hover{
     opacity: 1.0;
 }
 #mainCurrentBattleBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/CurrentBattle2.png");
 }
 #mainCurrentBattleBack:hover{
     opacity: 1.0;
 }
 #mainSearchPlayerFront{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/SearchPlayer1.png");
 }
 #mainSearchPlayerFront:hover{
     opacity: 1.0;
 }
 #mainSearchPlayerBack{
-    opacity: 0.6;
+    opacity: 0.9;
     background-image:url("/assets/SearchPlayer2.png");
 }
 #mainSearchPlayerBack:hover{
@@ -244,6 +244,6 @@ html {
 
 .pageButton{
     color: deepskyblue;
-    opacity: 0.8;
+    opacity: 0.9;
     margin: auto;
 }

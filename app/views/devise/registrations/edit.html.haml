@@ -70,59 +70,58 @@
               %input.btn.btn-lg.btn-primary{:name => "commit", :type => "submit", :value => "Update"}
 
 
-:javascript
-   $(document).ready(function(){
-      document.getElementById("mi_user_rankb").value = "#{current_user.rankb}";
-      document.getElementById("mi_user_ranks").value = #{current_user.ranks};
-      loadMyAppointments();
-   })
+  :javascript
+     $(document).ready(function(){
+        document.getElementById("mi_user_rankb").value = "#{current_user.rankb}";
+        document.getElementById("mi_user_ranks").value = #{current_user.ranks};
+        loadMyAppointments();
+     })
 
-   function loadMyAppointments(){
-       //get curtime in UTC with request
-       var curtime = new Date(Date.now());
-       curtime = timeToUTC(curtime);
-       curtime = Math.round(curtime / 100000);
+     function loadMyAppointments(){
+         //get curtime in UTC with request
+         var curtime = new Date(Date.now());
+         curtime = timeToUTC(curtime);
+         curtime = Math.round(curtime / 100000);
 
-       $.ajax({
-         url:  "/appointments/getMyAppt",
-         type: "get",
-         dataType: "json",
-         data: {curtime: curtime},
-         success: function(data){
-           var html = "";
-           for(var i = 0; i < data.allAppts.length; i++){
-             var arow = loadOneAppointment(data.allAppts[i].player1ID, data.allAppts[i].player2ID, data.allAppts[i].gametime, data.allAppts[i].apptID);
-             html = html + arow;
+         $.ajax({
+           url:  "/appointments/getMyAppt",
+           type: "get",
+           dataType: "json",
+           data: {curtime: curtime},
+           success: function(data){
+             var html = "";
+             for(var i = 0; i < data.allAppts.length; i++){
+               var arow = loadOneAppointment(data.allAppts[i].player1ID, data.allAppts[i].player2ID, data.allAppts[i].gametime, data.allAppts[i].apptID);
+               html = html + arow;
+             }
+             $("#mi_my_appointments_tbody").html(html);
            }
-           console.log(html);
-           $("#mi_my_appointments_tbody").html(html);
+         });
+     }
+
+     function cancelAppt(id){
+       $.ajax({
+         url: "/appointments/cancelAppt",
+         type: "put",
+         dataType: "json",
+         data: {apptID: id},
+         success: function(data){
+           $("#mi_my_appointments_tbody").html("");
+           if(data.status == 1){
+             loadMyAppointments();
+           }
          }
        });
-   }
+     }
 
-   function cancelAppt(id){
-     $.ajax({
-       url: "/appointments/cancelAppt",
-       type: "put",
-       dataType: "json",
-       data: {apptID: id},
-       success: function(data){
-         $("#mi_my_appointments_tbody").html("");
-         if(data.status == 1){
-           loadMyAppointments();
-         }
-       }
-     });
-   }
-
-   function loadOneAppointment(player1, player2, time, id){
-     var offset = new Date().getTimezoneOffset();
-     time = time * 100000 + offset*60*1000;
-     var timestr = new Date(time);
-     timestr = timestr.toString();
-     var html = "<tr><th class='thMyAppt'>" + timestr.substring(0,21) + "</th>" +
-                "<th class='thMyAppt'>" + player1 + "</th>" +
-                "<th class='thMyAppt'>" + player2 + "</th>" +
-                "<th class='thMyAppt'>" + "<a class='btn btn-danger' href='javascript:cancelAppt(" + id + ")'>Cancel</a>" + "</th></tr>";
-     return html;
-   }
+     function loadOneAppointment(player1, player2, time, id){
+       var offset = new Date().getTimezoneOffset();
+       time = time * 100000 + offset*60*1000;
+       var timestr = new Date(time);
+       timestr = timestr.toString();
+       var html = "<tr><th class='thMyAppt'>" + timestr.substring(0,21) + "</th>" +
+                  "<th class='thMyAppt'>" + player1 + "</th>" +
+                  "<th class='thMyAppt'>" + player2 + "</th>" +
+                  "<th class='thMyAppt'>" + "<a class='btn btn-danger' href='javascript:cancelAppt(" + id + ")'>Cancel</a>" + "</th></tr>";
+       return html;
+     }

@@ -79,7 +79,6 @@
         success: function(data){
           var totalPage = data.totalApptPage;
           var pageBtn = "";
-          console.log(totalPage);
           for(var i = 0; i < totalPage; i++){
             pageBtn = pageBtn + "<div class='btn btn-default' type='button'>" + (i+1) + "</div>";
             $("#appointment_pages").html(pageBtn);
@@ -102,7 +101,6 @@
       var gametime = new Date(Date.UTC(gamedate[2], gamedate[0]-1, gamedate[1], gamehour, 0, 0, 0));
       gametime = gametime.getTime() / 100000;
       var position = document.getElementById("appointment_position").value;
-      console.log(player1ID + ", " + gametime + ", " + position);
       if(isNaN(gametime) || curtime > gametime ){
         document.getElementById("appointment_gamedate").value = "";
         document.getElementById("appointment_timepicker").value = "0";
